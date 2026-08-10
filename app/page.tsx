@@ -1,69 +1,78 @@
-import Image from "next/image";
+import Link from "next/link";
+import { LANDING_LIST, SITE } from "@/lib/content";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+    <div className="relative overflow-hidden">
+      <div
+        className="hero-orb animate-breathe -left-24 top-10 size-72 bg-[#b9dde8]"
+        aria-hidden
+      />
+      <div
+        className="hero-orb animate-breathe right-[-4rem] top-40 size-80 bg-[#c8e8df]"
+        style={{ animationDelay: "1.5s" }}
+        aria-hidden
+      />
+
+      <section className="relative mx-auto flex min-h-[78vh] w-full max-w-5xl flex-col justify-center px-5 pb-16 pt-6 sm:px-8 sm:pt-10">
+        <p className="animate-rise font-display text-5xl tracking-tight text-deep sm:text-7xl md:text-8xl">
+          {SITE.name}
+        </p>
+        <h1 className="animate-rise-delay mt-5 max-w-2xl font-display text-2xl leading-snug text-deep/90 sm:text-3xl">
+          {SITE.tagline}
+        </h1>
+        <p className="animate-rise-delay-2 mt-5 max-w-xl text-base leading-relaxed text-deep/70 sm:text-lg">
+          L&apos;asma allergico non si risolve solo con l&apos;inalatore. Qui trovi
+          guide chiare per capire sintomi, trigger e passi concreti — pensate per
+          chi si sente perso dopo la visita.
+        </p>
+        <div className="animate-rise-delay-2 mt-8 flex flex-wrap gap-3">
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#guide"
+            className="rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:bg-accent-hover"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+            Scegli la tua guida
           </a>
         </div>
-      </main>
+      </section>
+
+      <section
+        id="guide"
+        className="relative mx-auto w-full max-w-5xl px-5 pb-20 sm:px-8"
+      >
+        <h2 className="font-display text-3xl text-deep sm:text-4xl">
+          Tre percorsi
+        </h2>
+        <p className="mt-3 max-w-2xl text-deep/70">
+          Alla fine della guida Canva trovi questi stessi tre approfondimenti.
+          Lascia la mail: prepariamo il foglio illustrativo e te lo inviamo entro
+          poche ore.
+        </p>
+
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {LANDING_LIST.map((landing, index) => (
+            <Link
+              key={landing.slug}
+              href={`/${landing.slug}`}
+              className="group animate-drift rounded-2xl border border-deep/10 bg-white/70 p-6 shadow-sm backdrop-blur transition hover:-translate-y-1 hover:border-accent/40 hover:bg-white"
+              style={{ animationDelay: `${index * 0.4}s` }}
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal">
+                {landing.shortLabel}
+              </p>
+              <h3 className="mt-3 font-display text-xl leading-snug text-deep group-hover:text-teal-dark">
+                {landing.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-deep/65">
+                {landing.description.slice(0, 120)}…
+              </p>
+              <span className="mt-5 inline-flex text-sm font-semibold text-accent">
+                Continua →
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
