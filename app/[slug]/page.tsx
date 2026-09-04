@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LeadForm } from "@/components/LeadForm";
 import { LANDINGS, LANDING_LIST, type LandingSlug } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -15,10 +16,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const landing = LANDINGS[slug as LandingSlug];
   if (!landing) return {};
-  return {
+  return pageMetadata({
     title: landing.title,
     description: landing.description,
-  };
+    path: `/${landing.slug}`,
+  });
 }
 
 export default async function LandingPage({ params }: Props) {

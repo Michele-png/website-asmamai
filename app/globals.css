@@ -118,3 +118,94 @@ body {
   filter: blur(40px);
   pointer-events: none;
 }
+
+.prose-asma {
+  color: color-mix(in srgb, var(--deep) 82%, white);
+  line-height: 1.75;
+}
+
+.prose-asma > * + * {
+  margin-top: 1rem;
+}
+
+.prose-asma h2 {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  color: var(--deep);
+  margin-top: 2rem;
+}
+
+.prose-asma h3 {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.2rem;
+  color: var(--deep);
+  margin-top: 1.5rem;
+}
+
+.prose-asma a {
+  color: var(--teal);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose-asma a:hover {
+  color: var(--teal-dark);
+}
+
+.prose-asma ul,
+.prose-asma ol {
+  padding-left: 1.25rem;
+}
+
+.prose-asma ul {
+  list-style: disc;
+}
+
+.prose-asma ol {
+  list-style: decimal;
+}
+
+.prose-asma li + li {
+  margin-top: 0.35rem;
+}
+
+.prose-asma strong {
+  color: var(--deep);
+  font-weight: 650;
+}
+
+.prose-asma blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  color: color-mix(in srgb, var(--deep) 70%, white);
+}
+
+.prose-asma code {
+  font-size: 0.9em;
+  background: color-mix(in srgb, var(--sky-100) 80%, white);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.35rem;
+}
+
+.prose-asma table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.prose-asma th,
+.prose-asma td {
+  text-align: left;
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--deep) 12%, transparent);
+}
+
+.prose-asma th {
+  font-weight: 650;
+  color: var(--deep);
+}
+
+.prose-asma details summary {
+  cursor: pointer;
+}

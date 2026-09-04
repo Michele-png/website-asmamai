@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
+import { SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy",
-};
+  description: `Informativa privacy di ${SITE.name}: come trattiamo l'email raccolta per i fogli illustrativi.`,
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

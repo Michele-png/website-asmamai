@@ -1,17 +1,23 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import type { LandingSlug } from "@/lib/content";
-import { SITE } from "@/lib/content";
+import Link from "next/link";
+import type { LeadOfferSlug } from "@/lib/content";
+import { SITE } from "@/lib/site";
 
 type Props = {
-  landing: LandingSlug;
+  landing: LeadOfferSlug;
   sheetName: string;
+  submitLabel?: string;
 };
 
 type Status = "idle" | "loading" | "success" | "error";
 
-export function LeadForm({ landing, sheetName }: Props) {
+export function LeadForm({
+  landing,
+  sheetName,
+  submitLabel = "Ricevi il foglio illustrativo",
+}: Props) {
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
@@ -88,11 +94,11 @@ export function LeadForm({ landing, sheetName }: Props) {
           className="mt-1 size-4 rounded border-deep/30 text-accent focus:ring-accent"
         />
         <span>
-          Acconsento al trattamento della mia email per ricevere il foglio
-          illustrativo richiesto. Leggi la{" "}
-          <a href="/privacy" className="underline decoration-accent/50 underline-offset-2 hover:text-teal">
+          Acconsento al trattamento della mia email per ricevere il materiale
+          informativo richiesto. Leggi la{" "}
+          <Link href="/privacy" className="underline decoration-accent/50 underline-offset-2 hover:text-teal">
             privacy
-          </a>
+          </Link>
           .
         </span>
       </label>
@@ -108,7 +114,7 @@ export function LeadForm({ landing, sheetName }: Props) {
         disabled={status === "loading"}
         className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-accent px-5 py-3.5 text-base font-semibold text-white transition hover:bg-accent-hover disabled:cursor-wait disabled:opacity-70"
       >
-        {status === "loading" ? "Invio in corso…" : "Ricevi il foglio illustrativo"}
+        {status === "loading" ? "Invio in corso…" : submitLabel}
       </button>
 
       <p className="mt-3 text-center text-xs text-deep/55">

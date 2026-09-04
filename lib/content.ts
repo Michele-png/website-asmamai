@@ -3,6 +3,8 @@ export type LandingSlug =
   | "allergie-alimentari"
   | "asma-allergico";
 
+export type LeadOfferSlug = LandingSlug | "solfiti";
+
 export type LandingConfig = {
   slug: LandingSlug;
   title: string;
@@ -13,12 +15,14 @@ export type LandingConfig = {
   sheetName: string;
 };
 
-export const SITE = {
-  name: "AsmaMai",
-  tagline: "Orientarsi quando l'asma non è sotto controllo",
-  emailNotifyHint:
-    "Entro poche ore riceverai il foglio illustrativo a questa email.",
-} as const;
+export type LeadOffer = {
+  slug: LeadOfferSlug;
+  title: string;
+  shortLabel: string;
+  sheetName: string;
+};
+
+export { SITE } from "@/lib/site";
 
 export const LANDINGS: Record<LandingSlug, LandingConfig> = {
   "acari-animali": {
@@ -66,3 +70,34 @@ export const LANDINGS: Record<LandingSlug, LandingConfig> = {
 };
 
 export const LANDING_LIST = Object.values(LANDINGS);
+
+export const LEAD_OFFERS: Record<LeadOfferSlug, LeadOffer> = {
+  "acari-animali": {
+    slug: "acari-animali",
+    title: LANDINGS["acari-animali"].title,
+    shortLabel: LANDINGS["acari-animali"].shortLabel,
+    sheetName: LANDINGS["acari-animali"].sheetName,
+  },
+  "allergie-alimentari": {
+    slug: "allergie-alimentari",
+    title: LANDINGS["allergie-alimentari"].title,
+    shortLabel: LANDINGS["allergie-alimentari"].shortLabel,
+    sheetName: LANDINGS["allergie-alimentari"].sheetName,
+  },
+  "asma-allergico": {
+    slug: "asma-allergico",
+    title: LANDINGS["asma-allergico"].title,
+    shortLabel: LANDINGS["asma-allergico"].shortLabel,
+    sheetName: LANDINGS["asma-allergico"].sheetName,
+  },
+  solfiti: {
+    slug: "solfiti",
+    title: "Lista stampabile: alimenti e farmaci con solfiti",
+    shortLabel: "Solfiti",
+    sheetName: "Lista stampabile — alimenti e farmaci con solfiti",
+  },
+};
+
+export function isLeadOfferSlug(value: string): value is LeadOfferSlug {
+  return value in LEAD_OFFERS;
+}

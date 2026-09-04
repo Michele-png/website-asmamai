@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import type { LandingSlug } from "@/lib/content";
-import { LANDINGS } from "@/lib/content";
+import { LEAD_OFFERS, isLeadOfferSlug } from "@/lib/content";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -19,13 +18,13 @@ export async function POST(req: NextRequest) {
   }
 
   const email = (body.email || "").trim().toLowerCase();
-  const landing = body.landing as LandingSlug | undefined;
+  const landing = body.landing;
   const consent = Boolean(body.consent);
 
   if (!EMAIL_RE.test(email)) {
     return NextResponse.json({ ok: false, error: "Inserisci un'email valida." }, { status: 400 });
   }
-  if (!landing || !(landing in LANDINGS)) {
+  if (!landing || !isLeadOfferSlug(landing)) {
     return NextResponse.json({ ok: false, error: "Landing non valida." }, { status: 400 });
   }
   if (!consent) {
@@ -47,7 +46,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const landingMeta = LANDINGS[landing];
+  const offer = LEAD_OFFERS[landing];
   const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
     method: "POST",
     headers: {
@@ -57,10 +56,10 @@ export async function POST(req: NextRequest) {
     body: JSON.stringify({
       email,
       landing,
-      landingTitle: landingMeta.title,
-      sheetName: landingMeta.sheetName,
+      landingTitle: offer.title,
+      sheetName: offer.sheetName,
       source: "asmamai.it",
-      _subject: `[AsmaMai] Nuova richiesta — ${landingMeta.shortLabel}`,
+      _subject: `[AsmaMai] Nuova richiesta — ${offer.shortLabel}`,
     }),
   });
 

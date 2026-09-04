@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: "/articoli/solfiti-e-asma",
+        destination: "/solfiti-e-asma",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
