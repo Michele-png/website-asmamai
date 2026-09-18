@@ -30,9 +30,11 @@ export const AUTHORS: Record<AuthorId, Author> = {
     id: "michele-scalzotto",
     name: "Michele Scalzotto",
     role: "Fondatore di AsmaMai, paziente asmatico con sensibilità ai solfiti",
-    // TODO(E-E-A-T): aggiungere i profili pubblici dell'autore, es.
-    // "https://www.linkedin.com/in/<handle>", "https://github.com/Michele-png"
-    sameAs: [],
+    // Profili pubblici dell'autore: collegano la Person del sito a una persona verificabile (E-E-A-T).
+    sameAs: [
+      "https://www.linkedin.com/in/michele-scalzotto",
+      "https://github.com/Michele-png",
+    ],
   },
 };
 
