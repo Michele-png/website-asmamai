@@ -1,6 +1,6 @@
 # AsmaMai
 
-Guida italiana indipendente alla **sensibilità ai solfiti negli asmatici**: [asmamai.it](https://asmamai.it).
+Guida italiana indipendente ai **trigger dell'asma**, organizzata per percorsi: [asmamai.it](https://asmamai.it). Il primo percorso pubblicato è la **sensibilità ai solfiti negli asmatici**; i percorsi sono elencati in `TRIGGER_HUBS` (`lib/site.ts`) e alimentano home e `llms.txt`.
 
 ## Pagine
 

@@ -6,10 +6,10 @@ import { getArticleBySlug, getRelatedArticles } from "@/lib/articles";
 import { CLUSTER_LABELS } from "@/lib/labels";
 import { pageMetadata } from "@/lib/metadata";
 import { articlePageJsonLd } from "@/lib/seo";
-import { PILLAR_SLUG, SITE, articlePath } from "@/lib/site";
+import { PILLAR_DESCRIPTION, PILLAR_SLUG, articlePath } from "@/lib/site";
 
 const FALLBACK_TITLE = "Solfiti e asma: capire, riconoscere, evitare le crisi";
-const FALLBACK_DESCRIPTION = SITE.description;
+const FALLBACK_DESCRIPTION = PILLAR_DESCRIPTION;
 
 export function generateMetadata(): Metadata {
   const article = getArticleBySlug(PILLAR_SLUG);
@@ -43,7 +43,7 @@ export default function PillarPage() {
         <h1 className="mt-3 font-display text-3xl leading-tight text-deep sm:text-5xl">
           {FALLBACK_TITLE}
         </h1>
-        <p className="mt-5 text-lg leading-relaxed text-deep/75">{SITE.description}</p>
+        <p className="mt-5 text-lg leading-relaxed text-deep/75">{FALLBACK_DESCRIPTION}</p>
         <p className="mt-5 text-deep/70">
           Questa guida sta per essere pubblicata. Intanto puoi consultare le
           schede su alimenti, farmaci e gli articoli già online.

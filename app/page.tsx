@@ -3,7 +3,13 @@ import { LeadMagnet } from "@/components/LeadMagnet";
 import { getLatestArticles } from "@/lib/articles";
 import { LANDING_LIST } from "@/lib/content";
 import { CLUSTER_LABELS } from "@/lib/labels";
-import { PILLAR_SLUG, SITE, articlePath, formatItDate } from "@/lib/site";
+import {
+  PILLAR_SLUG,
+  SITE,
+  TRIGGER_HUBS,
+  articlePath,
+  formatItDate,
+} from "@/lib/site";
 
 export default function HomePage() {
   const latest = getLatestArticles(6);
@@ -25,7 +31,7 @@ export default function HomePage() {
           {SITE.name}
         </p>
         <h1 className="animate-rise-delay mt-4 max-w-3xl font-display text-4xl leading-tight text-deep sm:text-6xl">
-          Solfiti e asma: capire, riconoscere, evitare le crisi
+          Asma: conoscere i trigger, evitare le crisi
         </h1>
         <p className="animate-rise-delay-2 mt-5 max-w-2xl text-base leading-relaxed text-deep/70 sm:text-lg">
           {SITE.description}
@@ -35,7 +41,7 @@ export default function HomePage() {
             href={`/${PILLAR_SLUG}`}
             className="rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:bg-accent-hover"
           >
-            Leggi la guida
+            Inizia dai solfiti
           </Link>
           <Link
             href="/alimenti"
@@ -47,12 +53,22 @@ export default function HomePage() {
       </section>
 
       <section className="relative mx-auto w-full max-w-5xl px-5 pb-16 sm:px-8">
-        <h2 className="font-display text-3xl text-deep sm:text-4xl">Inizia da qui</h2>
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal">
+          Primo percorso
+        </p>
+        <h2 className="mt-2 font-display text-3xl text-deep sm:text-4xl">
+          Solfiti e asma
+        </h2>
+        <p className="mt-3 max-w-2xl text-deep/70">
+          Il trigger più sottovalutato e il più documentato del sito: una guida,
+          una tabella alimenti e una tabella farmaci con gli eccipienti da
+          controllare.
+        </p>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           <StartCard
             href={`/${PILLAR_SLUG}`}
             kicker="Guida"
-            title="Solfiti e asma"
+            title="La guida completa"
             text="Il quadro: sintomi, meccanismi, etichette e cosa fare nel quotidiano."
           />
           <StartCard
@@ -67,6 +83,25 @@ export default function HomePage() {
             title="Eccipienti da controllare"
             text="Autoiniettori, colliri e soluzioni: cosa dice il foglietto."
           />
+        </div>
+      </section>
+
+      <section className="relative mx-auto w-full max-w-5xl px-5 pb-16 sm:px-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal">
+          I percorsi
+        </p>
+        <h2 className="mt-2 font-display text-3xl text-deep sm:text-4xl">
+          Un percorso per ogni trigger
+        </h2>
+        <p className="mt-3 max-w-2xl text-deep/70">
+          Ogni fattore che può scatenare l&apos;asma ha la stessa struttura:
+          una guida, tabelle di alimenti o farmaci e le evidenze. Partiamo dai
+          solfiti; gli altri arrivano uno alla volta.
+        </p>
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {TRIGGER_HUBS.map((hub) => (
+            <HubCard key={hub.id} hub={hub} />
+          ))}
         </div>
       </section>
 
@@ -165,5 +200,48 @@ function StartCard({
         Apri →
       </span>
     </Link>
+  );
+}
+
+function HubCard({ hub }: { hub: (typeof TRIGGER_HUBS)[number] }) {
+  const body = (
+    <>
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal">
+          {hub.kicker}
+        </p>
+        {hub.status === "upcoming" ? (
+          <span className="rounded-full border border-deep/10 px-2 py-0.5 text-[11px] font-medium text-deep/55">
+            In preparazione
+          </span>
+        ) : null}
+      </div>
+      <h3 className="mt-3 font-display text-xl text-deep group-hover:text-teal-dark">
+        {hub.title}
+      </h3>
+      <p className="mt-3 text-sm leading-relaxed text-deep/65">{hub.text}</p>
+      {hub.status === "live" ? (
+        <span className="mt-5 inline-flex text-sm font-semibold text-accent">
+          Apri →
+        </span>
+      ) : null}
+    </>
+  );
+
+  if (hub.status === "live" && hub.href) {
+    return (
+      <Link
+        href={hub.href}
+        className="group rounded-2xl border border-accent/30 bg-white/85 p-6 shadow-sm backdrop-blur transition hover:-translate-y-1 hover:border-accent/60 hover:bg-white"
+      >
+        {body}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="rounded-2xl border border-dashed border-deep/15 bg-white/40 p-6">
+      {body}
+    </div>
   );
 }

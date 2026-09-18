@@ -1,9 +1,9 @@
 export const SITE = {
   name: "AsmaMai",
   url: "https://asmamai.it",
-  tagline: "Solfiti e asma: guida indipendente",
+  tagline: "I trigger dell'asma, spiegati da un paziente",
   description:
-    "AsmaMai è la guida italiana indipendente alla sensibilità ai solfiti per chi ha l'asma: sintomi, alimenti, farmaci ed evidenze scientifiche, scritta da un paziente e basata su fonti primarie.",
+    "AsmaMai è la guida italiana indipendente ai fattori che scatenano l'asma: solfiti, farmaci, alimenti e allergeni. Sintomi, tabelle ed evidenze scientifiche, scritte da un paziente e basate su fonti primarie.",
   emailNotifyHint:
     "Entro poche ore riceverai il materiale informativo a questa email.",
   contactEmail: "info@asmamai.it",
@@ -13,6 +13,60 @@ export const SITE = {
 } as const;
 
 export const PILLAR_SLUG = "solfiti-e-asma";
+
+// Descrizione del primo percorso (solfiti). Il sito è l'ombrello dei trigger
+// dell'asma; i solfiti sono il primo hub, non l'identità del sito.
+export const PILLAR_DESCRIPTION =
+  "La guida italiana indipendente alla sensibilità ai solfiti per chi ha l'asma: sintomi, alimenti, farmaci ed evidenze scientifiche, scritta da un paziente e basata su fonti primarie.";
+
+export type TriggerHubStatus = "live" | "upcoming";
+
+export type TriggerHub = {
+  id: string;
+  /** Kicker breve mostrato sopra il titolo. */
+  kicker: string;
+  title: string;
+  text: string;
+  status: TriggerHubStatus;
+  /** Route del percorso quando è pubblicato. */
+  href?: string;
+};
+
+/**
+ * Percorsi del sito, uno per trigger dell'asma. Aggiungere qui un hub quando
+ * il suo pillar è pronto: la home e llms.txt lo leggono da questa lista.
+ */
+export const TRIGGER_HUBS: TriggerHub[] = [
+  {
+    id: "solfiti",
+    kicker: "Additivi",
+    title: "Solfiti",
+    text: "Vino, aceto, frutta secca, gamberi e gli eccipienti di autoiniettori e colliri. Il percorso più completo del sito.",
+    status: "live",
+    href: `/${PILLAR_SLUG}`,
+  },
+  {
+    id: "aspirina-fans",
+    kicker: "Farmaci",
+    title: "Aspirina e FANS",
+    text: "L'asma che peggiora con antinfiammatori e antidolorifici: quali molecole, quali alternative, cosa chiedere al medico.",
+    status: "upcoming",
+  },
+  {
+    id: "istamina",
+    kicker: "Alimenti",
+    title: "Istamina",
+    text: "Formaggi stagionati, insaccati, pesce conservato e fermentati: quando gli alimenti ricchi di istamina pesano sull'asma.",
+    status: "upcoming",
+  },
+  {
+    id: "acari-animali",
+    kicker: "Allergeni ambientali",
+    title: "Acari, pollini e animali",
+    text: "Polvere di casa, stagioni dei pollini, cani e gatti: riconoscere il trigger e ridurre l'esposizione senza panico.",
+    status: "upcoming",
+  },
+];
 
 export const AUTHOR_ID = "michele-scalzotto" as const;
 

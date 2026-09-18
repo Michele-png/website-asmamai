@@ -3,7 +3,7 @@ import { drugQuestion, getAllDrugs } from "@/lib/drugs";
 import { foodQuestion, getAllFoods } from "@/lib/foods";
 import { CATEGORY_LABELS, SULFITE_LEVEL_LABELS } from "@/lib/labels";
 import { LANDING_LIST } from "@/lib/content";
-import { PILLAR_SLUG, SITE, absoluteUrl, articleUrl } from "@/lib/site";
+import { PILLAR_SLUG, SITE, TRIGGER_HUBS, absoluteUrl, articleUrl } from "@/lib/site";
 
 function line(title: string, url: string, description: string): string {
   return `- [${title}](${url}): ${description}`;
@@ -20,7 +20,15 @@ export function buildLlmsTxt(): string {
     "",
     `> ${SITE.description}`,
     "",
-    "## Guida principale",
+    "## Percorsi per trigger",
+    "",
+    "AsmaMai è organizzato per fattori scatenanti dell'asma. Ogni percorso ha una guida, tabelle di alimenti o farmaci e le evidenze. Percorso pubblicato: solfiti. In preparazione: " +
+      TRIGGER_HUBS.filter((hub) => hub.status === "upcoming")
+        .map((hub) => hub.title.toLowerCase())
+        .join(", ") +
+      ".",
+    "",
+    "## Guida principale: solfiti e asma",
     "",
     pillar
       ? line(pillar.title, articleUrl(pillar.slug), pillar.description)
