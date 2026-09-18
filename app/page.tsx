@@ -102,9 +102,8 @@ export default function HomePage() {
       >
         <h2 className="font-display text-3xl text-deep sm:text-4xl">Tre percorsi</h2>
         <p className="mt-3 max-w-2xl text-deep/70">
-          Alla fine della guida Canva trovi questi stessi tre approfondimenti.
-          Lascia la mail: prepariamo il foglio illustrativo e te lo inviamo entro
-          poche ore.
+          Tre fogli illustrativi gratuiti per chi ha asma allergica. Lascia la
+          mail: prepariamo il foglio e te lo inviamo entro poche ore.
         </p>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">

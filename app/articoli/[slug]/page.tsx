@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: article.title,
     description: article.description,
     path: articlePath(article.slug),
+    hasSegmentImage: true,
     type: "article",
     publishedTime: article.publishedAt,
     modifiedTime: article.updatedAt,

@@ -5,9 +5,10 @@ import { getAllFoods } from "@/lib/foods";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Alimenti con solfiti",
+  title: "Alimenti che contengono solfiti: tabella completa (mg/kg, codici E)",
+  absoluteTitle: true,
   description:
-    "Tabella degli alimenti che possono contenere solfiti: livello, range tipico e codici E. Pensata per chi ha l'asma.",
+    "Tabella dei cibi che contengono solfiti: vino, aceto, frutta secca, gamberi, patate e altri 55 alimenti con livello, limite UE in mg/kg e codici E220–E228.",
   path: "/alimenti",
 });
 
@@ -20,11 +21,13 @@ export default function AlimentiIndexPage() {
         Database
       </p>
       <h1 className="mt-3 font-display text-3xl text-deep sm:text-5xl">
-        Alimenti con solfiti
+        Alimenti che contengono solfiti: la tabella completa
       </h1>
       <p className="mt-4 max-w-2xl text-deep/70">
-        Livelli indicativi da etichette e letteratura, non una soglia clinica.
-        Filtra per categoria e livello; ogni riga apre la scheda completa.
+        {foods.length} alimenti e bevande con livello indicativo, limite UE in
+        mg/kg (Reg. 1333/2008) e codici E220–E228 da cercare in etichetta.
+        Livelli da etichette e letteratura, non una soglia clinica. Filtra per
+        categoria e livello; ogni riga apre la scheda con la risposta breve.
       </p>
 
       {foods.length === 0 ? (

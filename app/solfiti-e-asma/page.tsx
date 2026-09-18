@@ -24,6 +24,7 @@ export function generateMetadata(): Metadata {
     title: article.title,
     description: article.description,
     path: `/${PILLAR_SLUG}`,
+    hasSegmentImage: true,
     type: "article",
     publishedTime: article.publishedAt,
     modifiedTime: article.updatedAt,

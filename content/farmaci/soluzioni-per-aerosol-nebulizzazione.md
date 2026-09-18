@@ -1,6 +1,7 @@
 ---
 name: "Soluzioni per aerosol (nebulizzazione)"
 slug: soluzioni-per-aerosol-nebulizzazione
+aliases: ["Clenil composta", "Ventmax"]
 activeIngredient: "vari (salbutamolo, beclometasone, associazioni, altri)"
 form: "soluzione per nebulizzazione"
 containsSulfites: variabile

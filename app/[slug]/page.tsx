@@ -16,11 +16,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const landing = LANDINGS[slug as LandingSlug];
   if (!landing) return {};
-  return pageMetadata({
-    title: landing.title,
-    description: landing.description,
-    path: `/${landing.slug}`,
-  });
+  return {
+    ...pageMetadata({
+      title: landing.title,
+      description: landing.description,
+      path: `/${landing.slug}`,
+    }),
+    // Landing da lead magnet, ~150 parole e fuori tema rispetto al pillar solfiti:
+    // su un dominio nuovo sottraggono scansione alle schede. Restano raggiungibili
+    // dai link, ma non competono in indice finché il pillar "casa e asma" non esiste.
+    robots: { index: false, follow: true },
+  };
 }
 
 export default async function LandingPage({ params }: Props) {

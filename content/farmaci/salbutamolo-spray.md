@@ -1,6 +1,7 @@
 ---
 name: "Salbutamolo spray (MDI)"
 slug: salbutamolo-spray
+aliases: ["Ventolin"]
 activeIngredient: "salbutamolo solfato"
 form: "aerosol"
 containsSulfites: no

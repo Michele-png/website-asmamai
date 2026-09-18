@@ -1,6 +1,7 @@
 ---
 name: "Idrocortisone iniettabile"
 slug: idrocortisone-iniettabile
+aliases: ["Solu-Cortef"]
 activeIngredient: "idrocortisone sodio succinato"
 form: "soluzione iniettabile"
 containsSulfites: no

@@ -27,6 +27,7 @@ type Props = {
   faq?: { q: string; a: string }[];
   sources?: { title: string; url: string }[];
   related?: RelatedItem[];
+  relatedTitle?: string;
   showLead?: boolean;
 };
 
@@ -46,6 +47,7 @@ export function ArticleLayout({
   faq,
   sources,
   related,
+  relatedTitle = "Articoli correlati",
   showLead = true,
 }: Props) {
   const author = authorId === "michele-scalzotto" ? AUTHORS["michele-scalzotto"] : null;
@@ -88,7 +90,7 @@ export function ArticleLayout({
 
       {related && related.length > 0 ? (
         <section className="mt-12">
-          <h2 className="font-display text-2xl text-deep">Articoli correlati</h2>
+          <h2 className="font-display text-2xl text-deep">{relatedTitle}</h2>
           <ul className="mt-4 space-y-2">
             {related.map((item) => (
               <li key={item.href}>

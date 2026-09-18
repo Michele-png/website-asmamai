@@ -49,9 +49,7 @@ sources:
     url: "https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32019R0934"
   - title: "AIFA — Banca dati medicinali"
     url: "https://medicinali.aifa.gov.it/"
-related:
-  - sintomi-sensibilita-solfiti-asma
-  - perche-i-solfiti-scatenano-asma
+related: [intolleranza-ai-solfiti, sintomi-sensibilita-solfiti-asma, test-intolleranza-solfiti-diagnosi, cibi-insospettabili-con-solfiti]
 ---
 
 Se dopo un bicchiere di vino, una manciata di albicocche secche o un piatto di gamberi ti si chiude il petto, non è detto che sia «solo l'alcol» o «un'allergia al cibo». In una quota di persone asmatiche i [solfiti](/articoli/additivi-e220-e228-cosa-sono) — additivi usati da secoli come conservanti e antiossidanti — possono scatenare un vero broncospasmo. Questa guida raccoglie cosa sono, dove si trovano, chi è a rischio, come si riconosce la reazione, come si diagnostica e cosa fare nella vita di tutti i giorni.

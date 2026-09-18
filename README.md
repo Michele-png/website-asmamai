@@ -66,16 +66,20 @@ answer: string           # 1–2 sentence direct answer to "<name> contengono so
 alternatives: [string]
 tips: [string]
 updatedAt: YYYY-MM-DD
+plural: true|false        # opzionale: forza "contengono"/"contiene" in titolo e H1 se l'euristica sbaglia
 sources:
   - title: string
     url: string
 ```
+
+Title tag e H1 sono generati: `<name> contiene|contengono solfiti? <risposta breve dal livello>`.
 
 ### Farmaci — `content/farmaci/<slug>.md`
 
 ```yaml
 name: string             # commercial or generic name as commonly searched
 slug: string
+aliases: [string]        # opzionale: nomi commerciali VERIFICATI nel testo (es. Bentelan). Entrano in title, H1, tabella e schema Drug.alternateName
 activeIngredient: string
 form: string             # e.g. "soluzione iniettabile", "aerosol", "collirio"
 containsSulfites: si | no | variabile
@@ -94,8 +98,11 @@ sources:
 - Metadata: title, description, canonical, Open Graph, Twitter card, robots index/follow
 - JSON-LD: Organization, WebSite, Person, MedicalWebPage + Article, FAQPage, BreadcrumbList, Drug
 - `robots.txt` consente i crawler classici e i bot LLM (GPTBot, ChatGPT-User, ClaudeBot, anthropic-ai, PerplexityBot, Google-Extended, Bingbot, Applebot-Extended, CCBot); `Disallow: /api/`
-- `sitemap.xml` con `lastModified` dal frontmatter
-- `/llms.txt` (indice) e `/llms-full.txt` (testi completi degli articoli)
+- `sitemap.xml` con `lastModified` dal frontmatter (le pagine statiche usano la data più recente dei contenuti, mai `new Date()`)
+- Immagini Open Graph generate a build time (`opengraph-image.tsx` in home, pillar, articoli, alimenti, farmaci)
+- Le landing `/acari-animali`, `/allergie-alimentari`, `/asma-allergico` sono `noindex,follow` e fuori sitemap
+- `/llms.txt` (indice) e `/llms-full.txt` (testi completi di articoli, alimenti e farmaci)
+- IndexNow: `npm run indexnow` dopo ogni deploy invia gli URL della sitemap a Bing (che alimenta ChatGPT search e Copilot). La chiave è `public/<chiave>.txt`.
 
 ## Lead magnet
 

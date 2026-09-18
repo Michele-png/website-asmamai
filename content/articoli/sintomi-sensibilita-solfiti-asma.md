@@ -1,11 +1,11 @@
 ---
-title: "Sintomi della sensibilità ai solfiti se hai l'asma"
+title: "Sintomi dell'intolleranza ai solfiti nell'asma: come riconoscerli"
 slug: sintomi-sensibilita-solfiti-asma
-description: "Broncospasmo in minuti, tosse e dispnea dopo vino o cibi con solfiti: come riconoscerli e distinguerli da alcol, istamina, allergia e reflusso."
+description: "Sintomi dell'intolleranza ai solfiti: broncospasmo in minuti, tosse, dispnea, orticaria. Come riconoscerli con l'asma e distinguerli da alcol, istamina e reflusso."
 tldr: "Nella persona asmatica la sensibilità ai solfiti si manifesta soprattutto come broncospasmo: costrizione toracica, fischio, tosse e respiro corto, di solito da pochi minuti a un'ora dopo l'ingestione. Le bevande acide (vino, succhi) colpiscono prima dei cibi solidi. Non è la stessa cosa dell'intolleranza all'alcol, della reazione all'istamina, di un'allergia alimentare IgE o del reflusso. Se la dispnea è grave, non riesci a parlare, hai labbra cianotiche o sintomi sistemici (orticaria diffusa, calo di pressione), vai al pronto soccorso. Tieni sempre il broncodilatatore di emergenza. Queste informazioni non sostituiscono il medico."
 cluster: sintomi
 publishedAt: 2026-09-04
-updatedAt: 2026-09-04
+updatedAt: 2026-09-18
 author: michele-scalzotto
 reviewer: null
 readingMinutes: 6
@@ -31,9 +31,7 @@ sources:
     url: "https://pubmed.ncbi.nlm.nih.gov/3535492/"
   - title: "Bold J. Considerations for the diagnosis and management of sulphite sensitivity. Gastroenterol Hepatol Bed Bench. 2012."
     url: "https://pubmed.ncbi.nlm.nih.gov/24834191/"
-related:
-  - perche-i-solfiti-scatenano-asma
-  - test-intolleranza-solfiti-diagnosi
+related: [intolleranza-ai-solfiti, test-intolleranza-solfiti-diagnosi, perche-i-solfiti-scatenano-asma]
 ---
 
 Il segnale più frequente, se hai l'asma e i solfiti ti stanno male, è un **broncospasmo rapido**: il petto si stringe, il respiro fischia, arriva la tosse. Non è un malessere vago da «cibo pesante». È una reazione delle vie aeree, spesso entro un'ora, e merita di essere distinta da alcol, istamina, allergia alimentare e reflusso. Per il quadro d'insieme vedi la [guida solfiti e asma](/solfiti-e-asma).

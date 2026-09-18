@@ -29,9 +29,7 @@ sources:
     url: "https://pubmed.ncbi.nlm.nih.gov/24834191/"
   - title: "Esempio di foglietto: Adrenalina (sodio metabisolfito tra gli eccipienti)"
     url: "https://www.torrinomedica.it/schede-farmaci/adrenalina-2/"
-related:
-  - solfiti-e-asma
-  - sintomi-sensibilita-solfiti-asma
+related: [adrenalina-autoiniettabile-nomi-commerciali, molibdeno-e-altri-rimedi-solfiti]
 ---
 
 I solfiti non stanno solo nel [vino](/alimenti/vino). In farmacia arrivano come **eccipienti**: piccole quantità di metabisolfito che impediscono all'adrenalina o ad altri principi attivi di ossidarsi e diventare inutili. Se hai asma e [sensibilità ai solfiti](/solfiti-e-asma), vale la pena sapere dove cercarli — e sapere che **un farmaco salvavita non si rifiuta in urgenza** per via dell'eccipiente. L'elenco dei [farmaci](/farmaci) sul sito è il punto da cui partire; qui spieghiamo le classi e il paradosso.

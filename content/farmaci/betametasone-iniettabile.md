@@ -1,6 +1,7 @@
 ---
 name: "Betametasone iniettabile"
 slug: betametasone-iniettabile
+aliases: ["Bentelan"]
 activeIngredient: "betametasone disodio fosfato"
 form: "soluzione iniettabile"
 containsSulfites: si

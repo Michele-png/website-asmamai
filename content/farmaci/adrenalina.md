@@ -1,6 +1,7 @@
 ---
-name: Adrenalina (autoiniettore)
+name: "Adrenalina autoiniettabile"
 slug: adrenalina
+aliases: ["Fastjekt", "Jext", "Chenpen"]
 activeIngredient: adrenalina (epinefrina)
 form: soluzione iniettabile in penna preriempita
 containsSulfites: si
@@ -8,7 +9,7 @@ sulfiteExcipient: sodio metabisolfito (E223)
 relevanceForAsthma: "Il foglietto segnala che il metabisolfito può raramente causare reazioni di ipersensibilità e broncospasmo; in anafilassi l'adrenalina resta comunque il trattamento di prima scelta."
 answer: "Gli autoiniettori italiani (Fastjekt, EpiPen) contengono metabisolfito (E223). In anafilassi si usa lo stesso: il beneficio supera il rischio."
 notes: "Non sospendere l'autoiniettore per la presenza di solfiti. In caso di asma da solfiti, parla con l'allergologo della formulazione in uso e tieni sempre due penne come da indicazioni cliniche."
-updatedAt: 2026-09-04
+updatedAt: 2026-09-18
 sources:
   - title: "Banca Dati Farmaci AIFA — cerca Fastjekt / EpiPen (foglio illustrativo)"
     url: "https://farmaci.agenziafarmaco.gov.it/bancadatifarmaci/cerca-farmaco"

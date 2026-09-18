@@ -1,6 +1,6 @@
 import type { Article } from "@/lib/articles";
-import type { Drug } from "@/lib/drugs";
-import type { Food } from "@/lib/foods";
+import { drugDisplayName, type Drug } from "@/lib/drugs";
+import { foodQuestion, type Food } from "@/lib/foods";
 import { AUTHORS, ORGANIZATION, SITE, absoluteUrl, articleUrl } from "@/lib/site";
 
 const CONDITION_ID = `${SITE.url}/#condition-asma-solfiti`;
@@ -154,7 +154,7 @@ export function breadcrumbJsonLd(items: BreadcrumbItem[]): JsonLdNode {
 
 export function foodJsonLd(food: Food): JsonLdNode {
   const url = absoluteUrl(`/alimenti/${food.slug}`);
-  const question = `${food.name} contengono solfiti?`;
+  const question = foodQuestion(food);
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -162,7 +162,7 @@ export function foodJsonLd(food: Food): JsonLdNode {
         "@type": "WebPage",
         "@id": `${url}#webpage`,
         url,
-        name: food.name,
+        name: question,
         description: food.answer,
         inLanguage: "it-IT",
         isPartOf: { "@id": WEBSITE_ID },
@@ -202,7 +202,7 @@ export function drugJsonLd(drug: Drug): JsonLdNode {
         "@type": "WebPage",
         "@id": `${url}#webpage`,
         url,
-        name: drug.name,
+        name: `${drugDisplayName(drug)} contiene solfiti?`,
         description: drug.answer,
         inLanguage: "it-IT",
         isPartOf: { "@id": WEBSITE_ID },
@@ -216,9 +216,10 @@ export function drugJsonLd(drug: Drug): JsonLdNode {
         "@type": "Drug",
         "@id": drugId,
         name: drug.name,
+        ...(drug.aliases.length > 0 ? { alternateName: drug.aliases } : {}),
         activeIngredient: drug.activeIngredient,
         description: drug.answer,
-        proprietaryName: drug.name,
+        ...(drug.aliases.length > 0 ? { proprietaryName: drug.aliases.join(", ") } : {}),
       },
       sulfiteCondition(),
     ],

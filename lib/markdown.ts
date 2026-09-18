@@ -81,6 +81,18 @@ export function optionalString(
   return trimmed === "" ? null : trimmed;
 }
 
+export function optionalBoolean(
+  data: Record<string, unknown>,
+  field: string,
+): boolean | null {
+  const value = data[field];
+  if (value === undefined || value === null || value === "") return null;
+  if (typeof value === "boolean") return value;
+  if (value === "true" || value === "si" || value === "sì") return true;
+  if (value === "false" || value === "no") return false;
+  throw fieldError(String(data.slug ?? field), field, "atteso true/false");
+}
+
 export function requireNumber(
   data: Record<string, unknown>,
   field: string,

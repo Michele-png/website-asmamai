@@ -14,8 +14,8 @@ tips:
   - Un cucchiaio di aceto è poco volume, ma 170 mg/L non è una dose da ignorare.
   - Chiedi sempre l’aceto a parte sull’insalata al ristorante.
   - "L’aceto di alcol (non di fermentazione) non ha questo tetto: leggi l’etichetta."
-  - Balsamico, di mele e di vino cadono tutti nella stessa famiglia se sono di fermentazione.
-updatedAt: 2026-09-04
+  - Balsamico, di mele e di vino cadono tutti nella stessa famiglia se sono di fermentazione (il bio non può avere solfiti aggiunti).
+updatedAt: 2026-09-18
 sources:
   - title: Regolamento (CE) n. 1333/2008, allegato II, categoria 12.3
     url: "https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:02008R1333-20240602"
@@ -31,7 +31,7 @@ Perché nasce da una fermentazione (spesso di [vino](/alimenti/vino)) e l’SO�
 
 ## Quanto solfito c’è nell’aceto?
 
-Il limite massimo UE è 170 mg/L per gli aceti di fermentazione. Non ho un livello tipico misurato unico: molte bottiglie superano i 10 mg/L e dichiarano l’allergene, altre (soprattutto alcuni aceti di mele) restano sotto. L’[aceto balsamico](/alimenti/aceto-balsamico) condivide lo stesso tetto. Distingui sempre il tetto di legge da quanto c’è nella tua bottiglia: l’etichetta non riporta i milligrammi. Vedi [cibi insospettabili](/articoli/cibi-insospettabili-con-solfiti).
+Il limite massimo UE è 170 mg/L per gli aceti di fermentazione. Non ho un livello tipico misurato unico: molte bottiglie superano i 10 mg/L e dichiarano l’allergene, altre (soprattutto alcuni aceti di mele) restano sotto. L’[aceto balsamico](/alimenti/aceto-balsamico) e l’[aceto di mele](/alimenti/aceto-di-mele) condividono lo stesso tetto; nel biologico i solfiti non si possono aggiungere. Distingui sempre il tetto di legge da quanto c’è nella tua bottiglia: l’etichetta non riporta i milligrammi. Vedi [cibi insospettabili](/articoli/cibi-insospettabili-con-solfiti).
 
 Il 170 mg/L è il limite massimo per gli aceti di fermentazione, non un valore tipico. L’aceto di alcol distillato non rientra in quella voce. Un cucchiaio è poco volume, ma sull’insalata si somma a senape e sottaceti. In ristorazione l’aceto della casa è quasi sempre di vino: chiedilo a parte, come faresti con il vino nel bicchiere.
 

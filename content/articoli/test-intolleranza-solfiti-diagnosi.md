@@ -29,9 +29,7 @@ sources:
     url: "https://pubmed.ncbi.nlm.nih.gov/24834193/"
   - title: "Bold J. Considerations for the diagnosis and management of sulphite sensitivity. 2012."
     url: "https://pubmed.ncbi.nlm.nih.gov/24834191/"
-related:
-  - sintomi-sensibilita-solfiti-asma
-  - solfiti-e-asma
+related: [intolleranza-ai-solfiti, sintomi-sensibilita-solfiti-asma]
 ---
 
 Se cerchi «test intolleranza solfiti» in rete trovi pannelli del sangue, IgG e prick casalinghi. Per i solfiti **non funzionano** come diagnosi. La strada seria è quella clinica: storia, diario, dieta di prova e, solo se serve, provocazione in ospedale. È lo stesso percorso descritto nella [guida completa](/solfiti-e-asma) e dalle società allergologiche.

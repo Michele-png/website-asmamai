@@ -1,6 +1,7 @@
 ---
 name: "Cortisonici inalatori"
 slug: cortisonici-inalatori
+aliases: ["Foster"]
 activeIngredient: "beclometasone, budesonide, fluticasone, ciclesonide e associazioni ICS/LABA"
 form: "aerosol"
 containsSulfites: no

@@ -3,7 +3,13 @@ import { notFound } from "next/navigation";
 import { ArticleLayout } from "@/components/ArticleLayout";
 import { FoodFactCard } from "@/components/FactCards";
 import { MarkdownBody } from "@/components/MarkdownBody";
-import { getAllFoodSlugs, getFoodBySlug } from "@/lib/foods";
+import {
+  foodQuestion,
+  foodTitle,
+  getAllFoodSlugs,
+  getFoodBySlug,
+  getRelatedFoods,
+} from "@/lib/foods";
 import { CATEGORY_LABELS } from "@/lib/labels";
 import { pageMetadata } from "@/lib/metadata";
 import { foodPageJsonLd } from "@/lib/seo";
@@ -21,9 +27,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const food = getFoodBySlug(slug);
   if (!food) return {};
   return pageMetadata({
-    title: `${food.name} e solfiti`,
+    title: foodTitle(food),
+    absoluteTitle: true,
     description: food.answer,
     path: `/alimenti/${food.slug}`,
+    hasSegmentImage: true,
     modifiedTime: food.updatedAt,
   });
 }
@@ -38,17 +46,23 @@ export default async function FoodPage({ params }: Props) {
     { name: "Alimenti", href: "/alimenti" },
     { name: food.name, href: `/alimenti/${food.slug}` },
   ];
+  const related = getRelatedFoods(food).map((item) => ({
+    href: `/alimenti/${item.slug}`,
+    title: foodQuestion(item),
+  }));
 
   return (
     <ArticleLayout
       breadcrumbs={breadcrumbs}
       jsonLd={foodPageJsonLd(food, breadcrumbs)}
       kicker={CATEGORY_LABELS[food.category]}
-      title={`${food.name}: contengono solfiti?`}
+      title={foodQuestion(food)}
       tldr={food.answer}
       updatedAt={food.updatedAt}
       factCard={<FoodFactCard food={food} />}
       sources={food.sources}
+      related={related}
+      relatedTitle="Altri alimenti da controllare"
     >
       <MarkdownBody content={food.body} />
     </ArticleLayout>

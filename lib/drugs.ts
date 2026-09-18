@@ -2,6 +2,7 @@ import { cache } from "react";
 import {
   fieldError,
   loadMarkdownDir,
+  optionalStringArray,
   requireDate,
   requireSlugMatch,
   requireSources,
@@ -26,7 +27,44 @@ export type Drug = {
   updatedAt: string;
   sources: DrugSource[];
   body: string;
+  /** Nomi commerciali verificati nel testo (es. Bentelan): entrano in title, H1 e schema Drug.alternateName. */
+  aliases: string[];
 };
+
+const CONTAINS_HINT: Record<ContainsSulfites, string> = {
+  si: "Sì",
+  no: "No",
+  variabile: "Dipende",
+};
+
+/** "Soluzioni per aerosol (nebulizzazione)" → "Soluzioni per aerosol" */
+function stripParens(name: string): string {
+  return name.replace(/\s*\([^)]*\)\s*/g, " ").replace(/\s+/g, " ").trim();
+}
+
+/** "Betametasone iniettabile (Bentelan)"; con alias la parentesi del nome lascia il posto ai marchi. */
+export function drugDisplayName(drug: Pick<Drug, "name" | "aliases">): string {
+  if (drug.aliases.length === 0) return drug.name;
+  return `${stripParens(drug.name)} (${drug.aliases.slice(0, 3).join(", ")})`;
+}
+
+/** "Betametasone iniettabile (Bentelan) contiene solfiti?" */
+export function drugQuestion(drug: Pick<Drug, "name" | "aliases">): string {
+  return `${drugDisplayName(drug)} contiene solfiti?`;
+}
+
+/** Title tag: domanda + risposta secca. Sotto i 60 caratteri privilegia il nome commerciale. */
+export function drugTitle(drug: Pick<Drug, "name" | "aliases" | "containsSulfites">): string {
+  const hint = CONTAINS_HINT[drug.containsSulfites];
+  const candidates = [
+    `${drugQuestion(drug)} ${hint}`,
+    ...(drug.aliases.length > 0
+      ? [`${drug.aliases[0]} (${stripParens(drug.name)}) contiene solfiti? ${hint}`]
+      : []),
+    `${stripParens(drug.name)} contiene solfiti? ${hint}`,
+  ];
+  return candidates.find((c) => c.length <= 60) ?? candidates[candidates.length - 1];
+}
 
 function parseContainsSulfites(
   data: Record<string, unknown>,
@@ -61,6 +99,7 @@ function parseDrug(file: ReturnType<typeof loadMarkdownDir>[number]): Drug {
     updatedAt: requireDate(file.data, "updatedAt", rel),
     sources: requireSources(file.data, rel),
     body: file.body,
+    aliases: optionalStringArray(file.data, "aliases", rel),
   };
 }
 
@@ -76,4 +115,14 @@ export const getDrugBySlug = cache((slug: string): Drug | null => {
 
 export function getAllDrugSlugs(): string[] {
   return getAllDrugs().map((drug) => drug.slug);
+}
+
+/** Altri farmaci: prima la stessa forma farmaceutica, poi lo stesso esito sui solfiti. */
+export function getRelatedDrugs(drug: Drug, limit = 6): Drug[] {
+  const all = getAllDrugs().filter((item) => item.slug !== drug.slug);
+  const sameForm = all.filter((item) => item.form === drug.form);
+  const sameOutcome = all.filter(
+    (item) => item.form !== drug.form && item.containsSulfites === drug.containsSulfites,
+  );
+  return [...sameForm, ...sameOutcome].slice(0, limit);
 }
