@@ -1,5 +1,5 @@
 import type { Article } from "@/lib/articles";
-import { drugDisplayName, type Drug } from "@/lib/drugs";
+import { drugQuestion, type Drug } from "@/lib/drugs";
 import { foodQuestion, type Food } from "@/lib/foods";
 import { AUTHORS, ORGANIZATION, SITE, absoluteUrl, articleUrl } from "@/lib/site";
 
@@ -197,7 +197,8 @@ export function foodJsonLd(food: Food): JsonLdNode {
 
 export function drugJsonLd(drug: Drug): JsonLdNode {
   const url = absoluteUrl(`/farmaci/${drug.slug}`);
-  const drugId = `${url}#drug`;
+  const question = drugQuestion(drug);
+  const substanceId = `${url}#substance`;
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -205,24 +206,42 @@ export function drugJsonLd(drug: Drug): JsonLdNode {
         "@type": "WebPage",
         "@id": `${url}#webpage`,
         url,
-        name: `${drugDisplayName(drug)} contiene solfiti?`,
+        name: question,
         description: drug.answer,
         inLanguage: "it-IT",
         isPartOf: { "@id": WEBSITE_ID },
-        about: { "@id": drugId },
+        about: [{ "@id": substanceId }, { "@id": CONDITION_ID }],
         dateModified: drug.updatedAt,
         publisher: { "@id": ORGANIZATION_ID },
-        mainEntity: { "@id": drugId },
+        mainEntity: { "@id": `${url}#faq` },
         breadcrumb: { "@id": `${url}#breadcrumb` },
       },
       {
-        "@type": "Drug",
-        "@id": drugId,
+        "@type": "FAQPage",
+        "@id": `${url}#faq`,
+        mainEntity: [
+          {
+            "@type": "Question",
+            "@id": `${url}#faq-1`,
+            name: question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: drug.answer,
+            },
+          },
+        ],
+      },
+      // Deliberately NOT schema.org/Drug: Drug is a subtype of Product, so Google
+      // validates it as a "Product snippet" and requires offers/review/aggregateRating,
+      // which an informational page cannot honestly provide. Substance is a plain
+      // MedicalEntity and carries the same descriptive fields.
+      {
+        "@type": "Substance",
+        "@id": substanceId,
         name: drug.name,
         ...(drug.aliases.length > 0 ? { alternateName: drug.aliases } : {}),
         activeIngredient: drug.activeIngredient,
         description: drug.answer,
-        ...(drug.aliases.length > 0 ? { proprietaryName: drug.aliases.join(", ") } : {}),
       },
       sulfiteCondition(),
     ],
