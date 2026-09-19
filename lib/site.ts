@@ -9,7 +9,10 @@ export const SITE = {
   contactEmail: "info@asmamai.it",
   locale: "it_IT",
   language: "it",
-  logoPath: "/logo.svg",
+  /** Logo quadrato raster per Organization/JSON-LD (Google: ≥112px, PNG). */
+  logoPath: "/logo-512.png",
+  /** Marchio vettoriale usato nell'header. */
+  markPath: "/logo-mark.svg",
 } as const;
 
 export const PILLAR_SLUG = "solfiti-e-asma";

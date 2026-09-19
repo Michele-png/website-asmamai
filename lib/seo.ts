@@ -27,6 +27,9 @@ export function organizationJsonLd(): JsonLdNode {
       "@type": "ImageObject",
       "@id": LOGO_ID,
       url: ORGANIZATION.logo,
+      contentUrl: ORGANIZATION.logo,
+      width: 512,
+      height: 512,
     },
     founder: { "@id": PERSON_ID },
   };

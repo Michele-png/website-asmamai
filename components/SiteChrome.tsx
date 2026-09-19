@@ -21,8 +21,16 @@ export function SiteHeader() {
     <header className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-3 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
       <Link
         href="/"
-        className="font-display text-2xl tracking-tight text-deep transition hover:text-teal"
+        className="flex items-center gap-2.5 font-display text-2xl tracking-tight text-deep transition hover:text-teal"
       >
+        {/* eslint-disable-next-line @next/next/no-img-element -- SVG statico, nessuna ottimizzazione necessaria */}
+        <img
+          src={SITE.markPath}
+          alt=""
+          width={32}
+          height={32}
+          className="size-8 shrink-0"
+        />
         {SITE.name}
       </Link>
       <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-deep/70">
