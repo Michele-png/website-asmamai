@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // www → apex (308). Il canonical punta già ad asmamai.it; senza redirect
+      // www.asmamai.it serviva una copia identica del sito su un secondo host.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.asmamai.it" }],
+        destination: "https://asmamai.it/:path*",
+        permanent: true,
+      },
       {
         source: "/articoli/solfiti-e-asma",
         destination: "/solfiti-e-asma",
