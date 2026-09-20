@@ -171,6 +171,7 @@ export function foodJsonLd(food: Food): JsonLdNode {
         isPartOf: { "@id": WEBSITE_ID },
         about: { "@id": CONDITION_ID },
         dateModified: food.updatedAt,
+        author: { "@id": PERSON_ID },
         publisher: { "@id": ORGANIZATION_ID },
         mainEntity: { "@id": `${url}#faq` },
         breadcrumb: { "@id": `${url}#breadcrumb` },
@@ -212,6 +213,7 @@ export function drugJsonLd(drug: Drug): JsonLdNode {
         isPartOf: { "@id": WEBSITE_ID },
         about: [{ "@id": substanceId }, { "@id": CONDITION_ID }],
         dateModified: drug.updatedAt,
+        author: { "@id": PERSON_ID },
         publisher: { "@id": ORGANIZATION_ID },
         mainEntity: { "@id": `${url}#faq` },
         breadcrumb: { "@id": `${url}#breadcrumb` },
@@ -278,4 +280,35 @@ export function foodPageJsonLd(food: Food, breadcrumbs: BreadcrumbItem[]): JsonL
 
 export function drugPageJsonLd(drug: Drug, breadcrumbs: BreadcrumbItem[]): JsonLdNode {
   return graphJsonLd(...nodesOf(drugJsonLd(drug)), breadcrumbJsonLd(breadcrumbs));
+}
+
+/**
+ * Home: un nodo WebPage con date, autore ed editore (i tool GEO leggono
+ * l'assenza di dateModified/author come "contenuto anonimo e non datato")
+ * più la FAQPage delle domande mostrate in pagina. Organization, Person e
+ * WebSite arrivano già dal grafo del layout.
+ */
+export function homeJsonLd(opts: {
+  faq: { q: string; a: string }[];
+  dateModified: string;
+}): JsonLdNode {
+  const url = `${SITE.url}/`;
+  const webpageId = `${SITE.url}/#webpage`;
+  const faq = faqJsonLd(opts.faq, url);
+  return graphJsonLd(
+    {
+      "@type": "WebPage",
+      "@id": webpageId,
+      url,
+      name: `${SITE.name} · ${SITE.tagline}`,
+      description: SITE.description,
+      inLanguage: "it-IT",
+      isPartOf: { "@id": WEBSITE_ID },
+      dateModified: opts.dateModified,
+      author: { "@id": PERSON_ID },
+      publisher: { "@id": ORGANIZATION_ID },
+      ...(faq ? { mainEntity: { "@id": `${url}#faq` } } : {}),
+    },
+    faq,
+  );
 }

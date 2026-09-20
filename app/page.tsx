@@ -1,9 +1,18 @@
 import Link from "next/link";
+import { Byline } from "@/components/Byline";
+import { Faq } from "@/components/Faq";
+import { JsonLd } from "@/components/JsonLd";
 import { LeadMagnet } from "@/components/LeadMagnet";
-import { getLatestArticles } from "@/lib/articles";
+import { getAllArticles, getLatestArticles } from "@/lib/articles";
 import { LANDING_LIST } from "@/lib/content";
+import { latestContentDate } from "@/lib/dates";
+import { getAllDrugs } from "@/lib/drugs";
+import { getAllFoods } from "@/lib/foods";
 import { CLUSTER_LABELS } from "@/lib/labels";
+import { homeJsonLd } from "@/lib/seo";
 import {
+  AUTHOR_ID,
+  AUTHORS,
   PILLAR_SLUG,
   SITE,
   TRIGGER_HUBS,
@@ -11,11 +20,50 @@ import {
   formatItDate,
 } from "@/lib/site";
 
+const author = AUTHORS[AUTHOR_ID];
+
+/*
+ * FAQ della home: risposte autonome (40–80 parole) che spiegano cos'è il sito,
+ * chi scrive e come si scelgono le fonti. Sono i segnali E-E-A-T che i tool
+ * GEO/AEO non trovavano in home. Niente diagnosi, niente terapia (AGENTS.md).
+ */
+function homeFaq(counts: { articles: number; foods: number; drugs: number }) {
+  return [
+    {
+      q: "Cos'è AsmaMai?",
+      a: `AsmaMai è una guida italiana indipendente ai fattori che possono scatenare l'asma: solfiti, farmaci, alimenti e allergeni ambientali. Per ogni trigger raccoglie una guida, tabelle di alimenti o farmaci e le fonti primarie (PubMed, EFSA, AIFA, regolamenti UE). Non vende prodotti e non ospita pubblicità. Il primo percorso pubblicato riguarda i solfiti; gli altri arrivano uno alla volta.`,
+    },
+    {
+      q: "Chi scrive i contenuti?",
+      a: `I testi sono scritti da ${author.name}, paziente asmatico con sensibilità ai solfiti e formazione statistica e informatica. Non è un medico: il sito informa e aiuta a preparare la visita, non formula diagnosi né indica terapie. Ogni pagina riporta autore, data di pubblicazione o aggiornamento e l'elenco delle fonti.`,
+    },
+    {
+      q: "Quali trigger dell'asma copre il sito?",
+      a: `Oggi il percorso completo è quello sui solfiti (E220–E228): una guida, ${counts.articles} articoli, ${counts.foods} schede alimenti e ${counts.drugs} schede farmaci. In preparazione: aspirina e FANS, istamina, acari, pollini e animali. Ogni percorso ha la stessa struttura, così le informazioni si confrontano facilmente.`,
+    },
+    {
+      q: "I contenuti sono revisionati da un medico?",
+      a: `Non ancora. Quando un medico revisiona un testo, il suo nome compare in pagina sotto l'autore, nella riga «Revisione medica»; finché quella riga manca, il testo è firmato solo dal paziente che lo ha scritto. Il metodo editoriale spiega come funziona la revisione e come segnalare un errore.`,
+    },
+    {
+      q: "Come vengono scelte le fonti?",
+      a: `Preferiamo documenti che si possono aprire e verificare: studi su PubMed, pareri EFSA, fogli illustrativi e RCP nella Banca Dati Farmaci AIFA, regolamenti UE sull'etichettatura (1169/2011) e sugli additivi (1333/2008). Blog e riassunti commerciali non sono fonti. Ogni articolo elenca le fonti in fondo, con link diretto al documento.`,
+    },
+  ];
+}
+
 export default function HomePage() {
   const latest = getLatestArticles(6);
+  const updatedAt = latestContentDate();
+  const faq = homeFaq({
+    articles: getAllArticles().length,
+    foods: getAllFoods().length,
+    drugs: getAllDrugs().length,
+  });
 
   return (
     <div className="relative overflow-hidden">
+      <JsonLd data={homeJsonLd({ faq, dateModified: updatedAt })} />
       <div
         className="hero-orb animate-breathe -left-24 top-10 size-72 bg-[#b9dde8]"
         aria-hidden
@@ -31,10 +79,10 @@ export default function HomePage() {
           {SITE.name}
         </p>
         <h1 className="animate-rise-delay mt-4 max-w-3xl font-display text-4xl leading-tight text-deep sm:text-6xl">
-          Asma: conoscere i trigger, evitare le crisi
+          {SITE.tagline}
         </h1>
         <p className="animate-rise-delay-2 mt-5 max-w-2xl text-base leading-relaxed text-deep/70 sm:text-lg">
-          {SITE.description}
+          {SITE.heroLead}
         </p>
         <div className="animate-rise-delay-2 mt-8 flex flex-wrap gap-3">
           <Link
@@ -49,6 +97,49 @@ export default function HomePage() {
           >
             Tabella alimenti
           </Link>
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="chi-scrive"
+        className="relative mx-auto w-full max-w-5xl px-5 pb-16 sm:px-8"
+      >
+        <div className="rounded-2xl border border-deep/10 bg-white/70 p-6 shadow-sm backdrop-blur sm:p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal">
+            Chi scrive
+          </p>
+          <h2 id="chi-scrive" className="mt-2 font-display text-2xl text-deep sm:text-3xl">
+            Un paziente che cita le fonti, non un medico
+          </h2>
+          <p className="mt-3 max-w-3xl leading-relaxed text-deep/75">
+            {SITE.name} è scritto da{" "}
+            <Link
+              href="/chi-siamo"
+              rel="author"
+              className="font-medium text-deep underline decoration-accent/40 underline-offset-2 hover:text-teal"
+            >
+              {author.name}
+            </Link>
+            , {author.role.replace(/^Fondatore di AsmaMai, /, "")}. Ogni pagina
+            parte dalla risposta, cita studi su PubMed, pareri EFSA, fogli
+            illustrativi AIFA e regolamenti UE, e mostra autore e data di
+            aggiornamento. Nessuna diagnosi, nessuna indicazione di terapia:
+            quelle restano al tuo medico.
+          </p>
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <Byline authorId={AUTHOR_ID} updatedAt={updatedAt} variant="page" />
+            <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-medium text-teal">
+              <Link href="/chi-siamo" className="hover:text-teal-dark">
+                Chi siamo →
+              </Link>
+              <Link href="/metodo-editoriale" className="hover:text-teal-dark">
+                Metodo editoriale →
+              </Link>
+              <a href={`mailto:${SITE.contactEmail}`} className="hover:text-teal-dark">
+                {SITE.contactEmail}
+              </a>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -164,6 +255,10 @@ export default function HomePage() {
             </Link>
           ))}
         </div>
+      </section>
+
+      <section className="relative mx-auto w-full max-w-3xl px-5 pb-4 sm:px-8">
+        <Faq items={faq} />
       </section>
 
       <section className="relative mx-auto w-full max-w-3xl px-5 pb-20 sm:px-8">

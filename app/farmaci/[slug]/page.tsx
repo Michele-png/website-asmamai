@@ -11,6 +11,7 @@ import {
   getRelatedDrugs,
 } from "@/lib/drugs";
 import { pageMetadata } from "@/lib/metadata";
+import { AUTHOR_ID } from "@/lib/site";
 import { drugPageJsonLd } from "@/lib/seo";
 
 type Props = {
@@ -58,6 +59,7 @@ export default async function DrugPage({ params }: Props) {
       title={drugQuestion(drug)}
       tldr={drug.answer}
       updatedAt={drug.updatedAt}
+      authorId={AUTHOR_ID}
       factCard={<DrugFactCard drug={drug} />}
       sources={drug.sources}
       related={related}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PILLAR_SLUG, SITE } from "@/lib/site";
+import { AUTHOR_ID, AUTHORS, PILLAR_SLUG, SITE } from "@/lib/site";
 
 const NAV = [
   { href: `/${PILLAR_SLUG}`, label: "Guida" },
@@ -48,11 +48,23 @@ export function SiteFooter() {
   return (
     <footer className="mx-auto mt-auto w-full max-w-5xl px-5 py-10 text-sm text-deep/55 sm:px-8">
       <div className="flex flex-col gap-4 border-t border-deep/10 pt-6 sm:flex-row sm:items-start sm:justify-between">
-        <p className="max-w-md">
-          © {new Date().getFullYear()} {SITE.name}. Contenuti informativi, non
-          sostituiscono diagnosi o terapia. In caso di crisi, cerca assistenza
-          medica.
-        </p>
+        <div className="max-w-md space-y-2">
+          <p>
+            © {new Date().getFullYear()} {SITE.name}. Contenuti informativi, non
+            sostituiscono diagnosi o terapia. In caso di crisi, cerca assistenza
+            medica.
+          </p>
+          <p>
+            Un progetto di{" "}
+            <Link href="/chi-siamo" rel="author" className="text-deep/75 hover:text-teal">
+              {AUTHORS[AUTHOR_ID].name}
+            </Link>
+            {" · "}
+            <a href={`mailto:${SITE.contactEmail}`} className="text-deep/75 hover:text-teal">
+              {SITE.contactEmail}
+            </a>
+          </p>
+        </div>
         <nav className="flex flex-col gap-2 sm:items-end">
           {FOOTER.map((item) => (
             <Link key={item.href} href={item.href} className="hover:text-teal">

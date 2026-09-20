@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { Byline } from "@/components/Byline";
 import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
 import { LeadMagnet } from "@/components/LeadMagnet";
 import { Sources } from "@/components/Sources";
 import { Tldr } from "@/components/Tldr";
-import { AUTHORS, formatItDate } from "@/lib/site";
 import type { BreadcrumbItem, JsonLdNode } from "@/lib/seo";
 
 type RelatedItem = { href: string; title: string };
@@ -50,8 +50,6 @@ export function ArticleLayout({
   relatedTitle = "Articoli correlati",
   showLead = true,
 }: Props) {
-  const author = authorId === "michele-scalzotto" ? AUTHORS["michele-scalzotto"] : null;
-
   return (
     <article className="relative mx-auto w-full max-w-3xl px-5 py-10 sm:px-8 sm:py-14">
       <JsonLd data={jsonLd} />
@@ -69,14 +67,13 @@ export function ArticleLayout({
         {title}
       </h1>
       <Tldr>{tldr}</Tldr>
-      <p className="mt-5 text-sm text-deep/60">
-        {author ? <span>{author.name}</span> : null}
-        {author && (publishedAt || updatedAt) ? " · " : null}
-        {publishedAt ? <>Pubblicato il {formatItDate(publishedAt)}</> : null}
-        {publishedAt && updatedAt ? " · " : null}
-        Aggiornato il {formatItDate(updatedAt)}
-        {readingMinutes ? ` · ${readingMinutes} min di lettura` : null}
-      </p>
+      <Byline
+        className="mt-5"
+        authorId={authorId}
+        publishedAt={publishedAt}
+        updatedAt={updatedAt}
+        readingMinutes={readingMinutes}
+      />
       {reviewer ? (
         <p className="mt-1 text-sm text-deep/60">Revisione medica: {reviewer}</p>
       ) : null}

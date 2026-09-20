@@ -2,8 +2,12 @@ export const SITE = {
   name: "AsmaMai",
   url: "https://asmamai.it",
   tagline: "I trigger dell'asma, spiegati da un paziente",
+  /** Meta description della home: ≤155 caratteri, altrimenti Google la tronca. */
   description:
-    "AsmaMai è la guida italiana indipendente ai fattori che scatenano l'asma: solfiti, farmaci, alimenti e allergeni. Sintomi, tabelle ed evidenze scientifiche, scritte da un paziente e basate su fonti primarie.",
+    "I trigger dell'asma, spiegati da un paziente: solfiti, farmaci, alimenti e allergeni. Sintomi, tabelle ed evidenze scientifiche con fonti primarie.",
+  /** Sottotitolo dell'hero in home (l'H1 è la tagline). */
+  heroLead:
+    "Asma: conoscere i trigger, evitare le crisi. Solfiti, farmaci, alimenti e allergeni spiegati con fonti primarie: sintomi, tabelle ed evidenze, senza sostituire il medico.",
   emailNotifyHint:
     "Entro poche ore riceverai il materiale informativo a questa email.",
   contactEmail: "info@asmamai.it",

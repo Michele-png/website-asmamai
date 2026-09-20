@@ -11,7 +11,7 @@ Guida italiana indipendente ai **trigger dell'asma**, organizzata per percorsi: 
 - `/farmaci` — tabella farmaci · `/farmaci/<slug>` — scheda
 - `/chi-siamo` · `/metodo-editoriale` · `/contatti` · `/privacy`
 - `/acari-animali` · `/allergie-alimentari` · `/asma-allergico` — landings fogli illustrativi
-- `/robots.txt` · `/sitemap.xml` · `/llms.txt` · `/llms-full.txt`
+- `/robots.txt` · `/sitemap.xml` · `/feed.xml` · `/llms.txt` · `/llms-full.txt`
 
 `/articoli/solfiti-e-asma` fa redirect 308 a `/solfiti-e-asma`.
 
@@ -102,6 +102,9 @@ sources:
 - Immagini Open Graph generate a build time (`opengraph-image.tsx` in home, pillar, articoli, alimenti, farmaci)
 - Le landing `/acari-animali`, `/allergie-alimentari`, `/asma-allergico` sono `noindex,follow` e fuori sitemap
 - `/llms.txt` (indice) e `/llms-full.txt` (testi completi di articoli, alimenti e farmaci)
+- Byline (`components/Byline.tsx`) su articoli, alimenti e farmaci: autore linkato a `/chi-siamo` con ruolo, date in `<time dateTime>`; la home ha un blocco «Chi scrive», una FAQ e uno schema `WebPage` + `FAQPage` con `dateModified` = data più recente dei contenuti (`lib/dates.ts`)
+- `/feed.xml` RSS 2.0 degli articoli, dichiarato con `<link rel="alternate">` su ogni pagina
+- Header di sicurezza (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`) in `next.config.ts`; niente CSP per ora
 - IndexNow: `npm run indexnow` dopo ogni deploy invia gli URL della sitemap a Bing (che alimenta ChatGPT search e Copilot). La chiave è `public/<chiave>.txt`.
 
 ## Lead magnet

@@ -12,6 +12,7 @@ import {
 } from "@/lib/foods";
 import { CATEGORY_LABELS } from "@/lib/labels";
 import { pageMetadata } from "@/lib/metadata";
+import { AUTHOR_ID } from "@/lib/site";
 import { foodPageJsonLd } from "@/lib/seo";
 
 type Props = {
@@ -59,6 +60,7 @@ export default async function FoodPage({ params }: Props) {
       title={foodQuestion(food)}
       tldr={food.answer}
       updatedAt={food.updatedAt}
+      authorId={AUTHOR_ID}
       factCard={<FoodFactCard food={food} />}
       sources={food.sources}
       related={related}

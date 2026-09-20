@@ -1,23 +1,9 @@
 import type { MetadataRoute } from "next";
 import { getAllArticles } from "@/lib/articles";
+import { latestContentDate } from "@/lib/dates";
 import { getAllDrugs } from "@/lib/drugs";
 import { getAllFoods } from "@/lib/foods";
 import { PILLAR_SLUG, absoluteUrl, articlePath } from "@/lib/site";
-
-/**
- * Le pagine statiche (home, indici, chi siamo…) cambiano quando cambia il
- * contenuto che elencano: usiamo la data più recente fra articoli, alimenti e
- * farmaci. Mai `new Date()`: un lastmod che cambia a ogni deploy insegna a
- * Google che il campo non è affidabile e lo fa ignorare su tutto il sito.
- */
-function latestContentDate(): string {
-  const dates = [
-    ...getAllArticles().map((a) => a.updatedAt),
-    ...getAllFoods().map((f) => f.updatedAt),
-    ...getAllDrugs().map((d) => d.updatedAt),
-  ].sort();
-  return dates[dates.length - 1] ?? "2026-09-04";
-}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const contentDate = latestContentDate();
